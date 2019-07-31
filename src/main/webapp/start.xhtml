@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+        <title>abyssus abyssum invocat</title>
+</h:head>
+
+<f:view>
+    <f:metadata>
+        <f:viewAction action="#{viewContents.onLoad()}"/>
+    </f:metadata>
+</f:view>
+
+<h:body>
+    <h:form id="ContentForm">
+        <p:fileUpload value="#{viewContents.file}" mode="advanced" sizeLimit="4294967295" skinSimple="true" update="ContentForm" fileUploadListener="#{viewContents.handleFileUpload}"/>
+
+        <p:dataTable id="ContentDataTable" var="rec" value="#{viewContents.content}" rows="10" scrollable="true"
+                     widgetVar="datatable"
+                     resizableColumns="true" style="margin-bottom:10px; margin-top:10px; height: auto; width: auto"
+                     paginator="true"
+                     lazy="true"
+                     rowKey="#{rec.id}"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15">
+
+            <f:facet name="header">
+                Контент
+            </f:facet>
+
+            <p:column headerText="Ид контента" resizable="true">
+                <h:outputText value="#{rec.id}" />
+            </p:column>
+
+            <p:column headerText="Название контента" resizable="true">
+                <h:outputText value="#{rec.name}" />
+            </p:column>
+
+            <p:column headerText="mimeType контента" resizable="true">
+                <h:outputText value="#{rec.mimeType}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+
+</ui:composition>
+</html>
